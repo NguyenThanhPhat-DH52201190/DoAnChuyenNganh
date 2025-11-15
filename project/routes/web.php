@@ -11,6 +11,21 @@ Route::get('/', function () {
 Route::get('/admin', function () {
     return view('admin');
 })->name('admin');
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+Route::get('/service', function () {
+    return view('service');
+})->name('service');
+Route::get('/doctor', function () {
+    return view('doctor');
+})->name('doctor');
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
+
+
 Route::get('/admin/category', function () {
     return view('admin/category/category_list');
 })->name('category');

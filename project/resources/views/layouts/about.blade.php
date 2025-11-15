@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Index - Medicio Bootstrap Template</title>
+  <title>About Us</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 <base href="{{asset('public/')}}">
@@ -37,70 +37,9 @@
   ======================================================== -->
 </head>
 
-<body class="index-page">
+@yield('body')
 
-  <header id="header" class="header sticky-top">
-
-    <div class="topbar d-flex align-items-center">
-      <div class="container d-flex justify-content-center justify-content-md-between">
-        <div class="d-none d-md-flex align-items-center">
-          <i class="bi bi-clock me-1"></i> Monday - Saturday, 8AM to 10PM
-        </div>
-        <div class="d-flex align-items-center">
-          <i class="bi bi-phone me-1"></i> Call us now +1 5589 55488 55
-        </div>
-      </div>
-    </div><!-- End Top Bar -->
-
-    <div class="branding d-flex align-items-center">
-
-      <div class="container position-relative d-flex align-items-center justify-content-end">
-        <a href="index.html" class="logo d-flex align-items-center me-auto">
-          <img src="img/logo.png" alt="">
-          <!-- Uncomment the line below if you also wish to use a text logo -->
-          <!-- <h1 class="sitename">Medicio</h1>  -->
-        </a>
-
-        <nav id="navmenu" class="navmenu">
-          <ul>
-            <li><a href="{{ route('home') }}" class="active">Home</a></li>
-            <li><a href="{{ route('about') }}">About</a></li>
-            <li><a href="{{ route('service') }}">Services</a></li>
-            <!-- <li><a href="/#deppartments">Departments</a></li> -->
-            <li><a href="{{ route('doctor') }}">Doctors</a></li>
-            <!-- <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="#">Dropdown 1</a></li>
-                <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                  <ul>
-                    <li><a href="#">Deep Dropdown 1</a></li>
-                    <li><a href="#">Deep Dropdown 2</a></li>
-                    <li><a href="#">Deep Dropdown 3</a></li>
-                    <li><a href="#">Deep Dropdown 4</a></li>
-                    <li><a href="#">Deep Dropdown 5</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Dropdown 2</a></li>
-                <li><a href="#">Dropdown 3</a></li>
-                <li><a href="#">Dropdown 4</a></li>
-              </ul>
-            </li> -->
-            <li><a href="{{ route('contact') }}">Contact</a></li>
-          </ul>
-          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-        </nav>
-
-        <a class="cta-btn" href="index.html#appointment">Make an Appointment</a>
-
-      </div>
-
-    </div>
-
-  </header>
-
-  @yield('body')
-
-  <footer id="footer" class="footer light-background">
+ <footer id="footer" class="footer light-background">
 
     <div class="container footer-top">
       <div class="row gy-4">
