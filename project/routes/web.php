@@ -1,71 +1,99 @@
 <?php
 
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController; // Sửa: Admin viết hoa
+use App\Http\Controllers\Admin\AdminController;    // Sửa: Admin viết hoa
 use App\Http\Controllers\ProfileController;
+use App\Models\Category;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
+// Trang chủ public
 Route::get('/', function () {
     return view('index');
 })->name('home');
-Route::get('/admin', function () {
-    return view('admin');
-})->name('admin');
+
+// Các trang public khác
 Route::get('/about', function () {
     return view('about');
 })->name('about');
+
 Route::get('/service', function () {
     return view('service');
 })->name('service');
+
 Route::get('/doctor', function () {
     return view('doctor');
 })->name('doctor');
+
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
+// Auth routes (login, register, password reset)
+Auth::routes();
 
+// Admin routes - bọc trong middleware auth
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    // Trang chủ admin - dùng Controller
+    Route::get('/', [AdminController::class, 'index'])->name('admin');
+    
+    // Category - dùng Controller
+    Route::get('/category', [CategoryController::class, 'index'])->name('category');
+    
+    // Product
+    Route::get('/product', function () {
+        return view('admin/product/product_list');
+    })->name('product');
+    
+    // Components
+    Route::get('/Button', function () {
+        return view('admin/Components/Button');
+    })->name('Button');
+    
+    Route::get('/Card', function () {
+        return view('admin/Components/Card');
+    })->name('Card');
+    
+    // Utilities
+    Route::get('/other', function () {
+        return view('admin/ul/other');
+    })->name('other');
+    
+    Route::get('/colors', function () {
+        return view('admin/ul/colors');
+    })->name('colors');
+    
+    Route::get('/border', function () {
+        return view('admin/ul/border');
+    })->name('border');
+    
+    Route::get('/animation', function () {
+        return view('admin/ul/animation');
+    })->name('animation');
+    
+    // Chart & Table
+    Route::get('/chart', function () {
+        return view('admin/chart/chart');
+    })->name('chart');
+    
+    Route::get('/table', function () {
+        return view('admin/table/table');
+    })->name('table');
+    
+    // Pages
+    Route::get('/blank', function () {
+        return view('admin/Page/blank');
+    })->name('blank');
+    
+    Route::get('/404', function () {
+        return view('admin/Page/404');
+    })->name('404');
+});
 
-Route::get('/admin/category', function () {
-    return view('admin/category/category_list');
-})->name('category');
-Route::get('/admin/product', function () {
-    return view('admin/product/product_list');
-})->name('product');
-Route::get('/admin/register', function () {
-    return view('admin/register/register');
-})->name('register');
-Route::get('/admin/forgotpassword', function () {
-    return view('admin/forgot/forgotpassword');
-})->name('forgotpassword');
-Route::get('/admin/Button', function () {
-    return view('admin/Components/Button');
-})->name('Button');
-Route::get('/admin/Card', function () {
-    return view('admin/Components/Card');
-})->name('Card');
-
-Route::get('/admin/other', function () {
-    return view('admin/ul/other');
-})->name('other');
-Route::get('/admin/colors', function () {
-    return view('admin/ul/colors');
-})->name('border');
-Route::get('/admin/border', function () {
-    return view('admin/ul/border');
-})->name('border');
-Route::get('/admin/animation', function () {
-    return view('admin/ul/animation');
-})->name('animation');
-Route::get('/admin/chart', function () {
-    return view('admin/chart/chart');
-})->name('chart');
-Route::get('/admin/table', function () {
-    return view('admin/table/table');
-})->name('table');
-Route::get('/admin/blank', function () {
-    return view('admin/Page/blank');
-})->name('blank');
-Route::get('/admin/404', function () {
-    return view('admin/Page/404');
-})->name('404');
+//admin category routes
+Route::get('/admin',[AdminController::class,'index'])->name('admin');
+Route::get('/admin/category',[CategoryController::class,'index'])->name('admin.category');
+Route::get('/admin/product',[ProductController::class,'index'])->name('admin.product');
