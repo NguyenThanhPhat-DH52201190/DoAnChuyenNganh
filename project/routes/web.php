@@ -41,12 +41,10 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');
     
     // Category - dùng Controller
-    Route::get('/category', [CategoryController::class, 'index'])->name('category');
+    Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
+    Route::get('/product',[ProductController::class,'index'])->name('admin.product');
     
-    // Product
-    Route::get('/product', function () {
-        return view('admin/product/product_list');
-    })->name('product');
+    
     
     // Components
     Route::get('/Button', function () {
@@ -94,6 +92,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 });
 
 //admin category routes
-Route::get('/admin',[AdminController::class,'index'])->name('admin');
-Route::get('/admin/category',[CategoryController::class,'index'])->name('admin.category');
-Route::get('/admin/product',[ProductController::class,'index'])->name('admin.product');
+
+
+Route::get('/logout-test', function () {
+    Auth::logout();
+    return 'Logged out';
+});
