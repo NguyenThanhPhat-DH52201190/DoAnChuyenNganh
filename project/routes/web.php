@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController; // Sửa: Admin viết hoa
 use App\Http\Controllers\Admin\AdminController;    // Sửa: Admin viết hoa
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Category;
 use Illuminate\Foundation\Application;
@@ -32,17 +33,10 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-// Auth routes (login, register, password reset)
 Auth::routes();
-
-// Admin routes - bọc trong middleware auth
-Route::middleware(['auth'])->prefix('admin')->group(function () {
-    // Trang chủ admin - dùng Controller
-    Route::get('/', [AdminController::class, 'index'])->name('admin');
-    
-    // Category - dùng Controller
-    Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
-    Route::get('/product',[ProductController::class,'index'])->name('admin.product');
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+    Route::get('/admin/category', [CategoryController::class, 'index'])->name('admin.category');
+    Route::get('/admin/product',[ProductController::class,'index'])->name('admin.product');
     
     
     
@@ -89,7 +83,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/404', function () {
         return view('admin/Page/404');
     })->name('404');
-});
+
 
 //admin category routes
 
