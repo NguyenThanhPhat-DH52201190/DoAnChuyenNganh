@@ -34,10 +34,14 @@ Route::get('/contact', function () {
 })->name('contact');
 
 Auth::routes();
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
-    Route::get('/admin/category', [CategoryController::class, 'index'])->name('admin.category');
-    Route::get('/admin/product',[ProductController::class,'index'])->name('admin.product');
-    
+Route::group([
+    'prefix' => 'admin', 
+    'as' => 'admin.'
+], function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin');
+    Route::resource('category', CategoryController::class);
+    Route::resource('product', ProductController::class);
+});
     
     
     // Components
