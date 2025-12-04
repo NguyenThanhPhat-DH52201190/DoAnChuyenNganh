@@ -7,7 +7,7 @@
   <title>Index - Medicio Bootstrap Template</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
-<base href="{{asset('public/')}}">
+  <base href="{{asset('public/')}}">
   <!-- Favicons -->
   <link href="img/favicon.png" rel="icon">
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -65,7 +65,18 @@
           <ul>
             <li><a href="{{ route('home') }}" class="active">Home</a></li>
             <li><a href="{{ route('about') }}">About</a></li>
-            <li><a href="{{ route('service') }}">Services</a></li>
+            <li class="dropdown"><a href="{{ route('service') }}">Services</a>
+              <ul class="dropdown-menu">
+                @if(isset($categories) && $categories->isNotEmpty())
+                @foreach($categories as $category)
+                <li><a href="{{ route('admin.category.index', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                </li>
+                @endforeach
+                @else
+                <li>Danh Mục Rỗng</li>
+                @endif
+              </ul>
+            </li>
             <li><a href="{{ route('doctor') }}">Doctors</a></li>
             <li><a href="{{ route('contact') }}">Contact</a></li>
           </ul>

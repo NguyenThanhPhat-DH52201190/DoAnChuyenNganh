@@ -12,9 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 // Trang chủ public
-Route::get('/', function () {
-    return view('index');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Các trang public khác
 Route::get('/about', function () {

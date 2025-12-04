@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
+use App\Models\Category;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,5 +24,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
 {
     Schema::defaultStringLength(191);
+    View::composer('layout.home', function ($view) {
+            $view->with('categories', Category::where('status', 1)->get());
+        });
 }
 }

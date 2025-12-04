@@ -11,6 +11,11 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        // Chỉ truy cập khi đã đăng nhập
+        $this->middleware('auth');   
+    }
     public function index()
     {
         $categories = Category::all();
@@ -33,6 +38,8 @@ class CategoryController extends Controller
         $category = Category::create(
             [
                 'name' => $request->name,
+                'image' => $request->image,
+                'status' => $request->status
             ]
         );
         if ($category)
@@ -68,7 +75,9 @@ class CategoryController extends Controller
         ]);
         $category = Category::findOrFail($category->id);
         $category->update([
-            'name' => $request->name
+            'name' => $request->name,
+            'image' => $request->image ?? $category->image,
+            'status' => $request->status ?? 0   
         ]);
 
         return redirect()->route('admin.category.index')

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\admin;
-
+use App\Models\Category;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -11,6 +11,12 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $products = Product::all();
+        view()->share('products', $products); 
+    }
     public function index()
     {
         $products = Product::all();
@@ -22,7 +28,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view ('admin.product.add');
+        $categories = Category::all();
+        return view ('admin.product.add',compact('categories'));
     }
 
     /**
@@ -32,14 +39,17 @@ class ProductController extends Controller
     {
         $product = Product::create(
             [
-                'namepro' => $request->name,
-                'soluong' => $request->quantity,
+                'namepro' => $request->namepro ?? '',
+                'imagepro' => $request->image ?? '',
+                'statuspro' => $request->status ?? 0,
+                'descriptionpro' => $request->description ?? '',
+                'price' => $request->price ?? 0,
+                'category_id' => $request->category_id ??null,
             ]
         );
-        if($product)
-            return redirect()->route('admin.product.index');
-        else
-                return back();
+        
+            return redirect()->route('admin.product.index')
+                ->with('success', 'Product created successfully!');
     }
 
     /**
@@ -56,7 +66,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
          $product = Product::findOrFail($product->idpro);
-        return view('admin.product.edit', compact('product'));
+         $categories = Category::all();
+        return view('admin.product.edit', compact('product','categories'));
     }
 
     /**
@@ -66,12 +77,15 @@ class ProductController extends Controller
     {
         $request->validate([
         'namepro' => 'required|min:3',
-        'soluong' => 'required|integer'
     ]);
         $product = Product::findOrFail($product->idpro);
         $product->update([
         'namepro' => $request->namepro,
-        'soluong' => $request->soluong,
+        'imagepro' => $request->imagepro ?? $product->imagepro,
+        'statuspro' => $request->statuspro,
+        'descriptionpro' => $request->descriptionpro,
+        'price' => $request->price ?? 0,
+        'category_id' => $request->category_id,
     ]);
 
     return redirect()->route('admin.product.index')
