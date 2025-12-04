@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::where('status', 1)->get(); // chỉ lấy active
-        return view('layouts.home', compact('categories'));
+        return view('index', compact('categories'));
     }
     public function logout()
     {
