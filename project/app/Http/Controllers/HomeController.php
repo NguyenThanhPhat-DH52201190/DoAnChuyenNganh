@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Category;
+use App\Models\Product;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth')->except(['index', 'logout']);
+        $categories = Category::where('status', 1)->get(); // chỉ lấy active
+        view()->share('categories', $categories);
     }
 
     /**
@@ -25,7 +28,8 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::where('status', 1)->get(); // chỉ lấy active
-        return view('index', compact('categories'));
+        $products = Product::where('statuspro', 1)->get();
+        return view('index', compact('categories', 'products'));
     }
     public function logout()
     {
@@ -33,5 +37,28 @@ class HomeController extends Controller
             Auth::logout();
         }
         return redirect('/');
-}
+    }
+
+    public function contact()
+    {
+        $contacts = Contact::first();
+        return view('contact', compact('contacts'));
+    }
+
+    public function category_product($categoryId)
+    {
+        $products = Product::where(
+            [
+            ['category_id','=', $categoryId],
+            ['statuspro','=', 1]
+            ])->get();
+            
+        return view('home.category_product', compact('products'));
+    }
+
+    public function single_product($id)
+    {
+        $product = Product::where('idpro', $id)->firstOrFail();
+        return view('home.single_product', compact('product'));
+    }
 }

@@ -22,6 +22,7 @@
     <div class="mb-3">
       <label for="category_id">Danh Mục</label>
       <select name="category_id" class="form-control">
+        <option value="">-- Chọn Danh Mục --</option>
         @foreach($categories as $category)
         <option value="{{ $category->id }}">{{ $category->name }}</option>
         @endforeach

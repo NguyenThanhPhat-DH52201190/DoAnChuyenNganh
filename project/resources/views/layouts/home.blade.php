@@ -43,12 +43,6 @@
 
     <div class="topbar d-flex align-items-center">
       <div class="container d-flex justify-content-center justify-content-md-between">
-        <div class="d-none d-md-flex align-items-center">
-          <i class="bi bi-clock me-1"></i> Monday - Saturday, 8AM to 10PM
-        </div>
-        <div class="d-flex align-items-center">
-          <i class="bi bi-phone me-1"></i> Call us now +1 5589 55488 55
-        </div>
       </div>
     </div><!-- End Top Bar -->
 
@@ -64,12 +58,11 @@
         <nav id="navmenu" class="navmenu">
           <ul>
             <li><a href="{{ route('home') }}" class="active">Home</a></li>
-            <li><a href="{{ route('about') }}">About</a></li>
-            <li class="dropdown"><a href="{{ route('service') }}">Services</a>
+            <li class="dropdown"><a href="{{ route('home') }}">Shop</a>
               <ul class="dropdown-menu">
                 @if(isset($categories) && $categories->isNotEmpty())
                 @foreach($categories as $category)
-                <li><a href="{{ route('admin.category.index', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                <li><a href="{{ route('category_product', ['category' => $category->id]) }}">{{ $category->name }}</a>
                 </li>
                 @endforeach
                 @else
@@ -77,7 +70,6 @@
                 @endif
               </ul>
             </li>
-            <li><a href="{{ route('doctor') }}">Doctors</a></li>
             <li><a href="{{ route('contact') }}">Contact</a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -95,82 +87,26 @@
 
   <footer id="footer" class="footer light-background">
 
-    <div class="container footer-top">
-      <div class="row gy-4">
-        <div class="col-lg-4 col-md-6 footer-about">
-          <a href="index.html" class="logo d-flex align-items-center">
-            <span class="sitename">Medicio</span>
-          </a>
-          <div class="footer-contact pt-3">
-            <p>A108 Adam Street</p>
-            <p>New York, NY 535022</p>
-            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-            <p><strong>Email:</strong> <span>info@example.com</span></p>
-          </div>
-          <div class="social-links d-flex mt-4">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
+    <div class="container">
+      <div class="row footer-top align-items-center">
+
+        <!-- Social -->
+
+        <div class="col-12">
+          <div class="d-flex justify-content-center align-items-center gap-4 mt-3">
+            <i class="bi bi-twitter-x fs-4"></i>
+            <i class="bi bi-facebook fs-4"></i>
+            <i class="bi bi-instagram fs-4"></i>
+            <i class="bi bi-linkedin fs-4"></i>
           </div>
         </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Useful Links</h4>
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Terms of service</a></li>
-            <li><a href="#">Privacy policy</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Our Services</h4>
-          <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Hic solutasetp</h4>
-          <ul>
-            <li><a href="#">Molestiae accusamus iure</a></li>
-            <li><a href="#">Excepturi dignissimos</a></li>
-            <li><a href="#">Suscipit distinctio</a></li>
-            <li><a href="#">Dilecta</a></li>
-            <li><a href="#">Sit quas consectetur</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Nobis illum</h4>
-          <ul>
-            <li><a href="#">Ipsam</a></li>
-            <li><a href="#">Laudantium dolorum</a></li>
-            <li><a href="#">Dinera</a></li>
-            <li><a href="#">Trodelas</a></li>
-            <li><a href="#">Flexo</a></li>
-          </ul>
-        </div>
-
       </div>
+
+
+      <!-- Useful links -->
+
+
     </div>
-
-    <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">Medicio</strong> <span>All Rights Reserved</span></p>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you've purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href=“https://themewagon.com>ThemeWagon
-      </div>
     </div>
 
   </footer>

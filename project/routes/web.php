@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController; // Sửa: Admin viết hoa
 use App\Http\Controllers\Admin\AdminController;    // Sửa: Admin viết hoa
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Models\Category;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -13,23 +14,12 @@ use Inertia\Inertia;
 
 // Trang chủ public
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
+Route::get('/category_product/{category}', [HomeController::class, 'category_product'])->name('category_product');
 // Các trang public khác
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
-
-Route::get('/service', function () {
-    return view('service');
-})->name('service');
-
-Route::get('/doctor', function () {
-    return view('doctor');
-})->name('doctor');
-
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+// Product detail
+Route::get('/product/{id}', [HomeController::class, 'single_product'])->name('single_product');
 
 Auth::routes();
 Route::group([
@@ -39,54 +29,12 @@ Route::group([
     Route::get('/', [AdminController::class, 'index'])->name('admin');
     Route::resource('category', CategoryController::class);
     Route::resource('product', ProductController::class);
+    Route::resource('contact', ContactController::class);
 });
     
     
     // Components
-    Route::get('/Button', function () {
-        return view('admin/Components/Button');
-    })->name('Button');
     
-    Route::get('/Card', function () {
-        return view('admin/Components/Card');
-    })->name('Card');
-    
-    // Utilities
-    Route::get('/other', function () {
-        return view('admin/ul/other');
-    })->name('other');
-    
-    Route::get('/colors', function () {
-        return view('admin/ul/colors');
-    })->name('colors');
-    
-    Route::get('/border', function () {
-        return view('admin/ul/border');
-    })->name('border');
-    
-    Route::get('/animation', function () {
-        return view('admin/ul/animation');
-    })->name('animation');
-    
-    // Chart & Table
-    Route::get('/chart', function () {
-        return view('admin/chart/chart');
-    })->name('chart');
-    
-    Route::get('/table', function () {
-        return view('admin/table/table');
-    })->name('table');
-    
-    // Pages
-    Route::get('/blank', function () {
-        return view('admin/Page/blank');
-    })->name('blank');
-    
-    Route::get('/404', function () {
-        return view('admin/Page/404');
-    })->name('404');
-
-
 //admin category routes
 
 
